@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8434da30-d5e7-41f4-b8c9-acd342f29f57" name="Changes" comment="" />
+    <list default="true" id="8434da30-d5e7-41f4-b8c9-acd342f29f57" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib__3_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5001/5001.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5001/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5002/5002.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5002/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5003/5003.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5003/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5004/5004.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5004/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5005/5005.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fpf/5005/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/fastjson-1.2.83.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/poi-ooxml-schemas-4.1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/xmlbeans-3.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metadata.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Parse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parseExcel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parseExcel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExcelHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExcelHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PFPInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PFPInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,18 +33,43 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2KiDEu5lG1lw8aodH01RnWJaexD" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "/Users/liujingqiang/Documents/chainbow/parseExcel",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Parse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Parse" />
+      <module name="parseExcel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Parse" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -32,5 +80,8 @@
       <updated>1674448402759</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
