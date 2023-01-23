@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Parse {
     public final static String FILEPATH = "/Users/liujingqiang/Documents/chainbow/parseExcel/metadata.xlsx";
-    public final static String TARGET_PATH = "/Users/liujingqiang/Documents/chainbow/parseExcel/fpf/";
+    public final static String TARGET_PATH = "/Users/liujingqiang/Documents/chainbow/parseExcel/pfp/";
     public static Map<Integer, PictureData> rowIndexPDataMap = new HashMap<>();
     public static Map<String, Integer> filedIndexMap = new HashMap<>();
     public static Map<String, List<String>> filedDataListMap = new ConcurrentHashMap<>();
