@@ -58,13 +58,15 @@ public class Parse {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         bufferedWriter.write(JSON.toJSONString(pfpInfo));
         bufferedWriter.close();
+        fileWriter.close();
     }
 
 
-    public static void readXlsx(String path) {
+    public static void readXlsx(String path) throws IOException {
+        XSSFWorkbook excel = null;
         try {
             OPCPackage pkg = OPCPackage.open(path);
-            XSSFWorkbook excel = new XSSFWorkbook(pkg);
+            excel = new XSSFWorkbook(pkg);
             XSSFSheet sheet = excel.getSheetAt(0);
             XSSFRow firstRow = sheet.getRow(0);
             for (Iterator<Cell> iterator = firstRow.cellIterator(); iterator.hasNext(); ) {
@@ -106,28 +108,32 @@ public class Parse {
                 }
 
             }
-
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (excel != null) excel.close();
         }
 
     }
 
-    public static void savePictureFromExcel(String filePath, int sheetNum) throws Exception {
-        FileInputStream fis = new FileInputStream(filePath);
-        XSSFWorkbook workbook = (XSSFWorkbook) WorkbookFactory.create(fis);
-        XSSFSheet sheet = workbook.getSheetAt(sheetNum);
-        List<XSSFShape> list = sheet.getDrawingPatriarch().getShapes();
-        for (int i = 0; i < sheet.getDrawingPatriarch().getShapes().size(); i++) {
-            XSSFShape shape = list.get(i);
-            XSSFClientAnchor anchor = (XSSFClientAnchor) shape.getAnchor();
-            if (shape instanceof XSSFPicture) {
-                XSSFPicture pic = (XSSFPicture) shape;
-                int rowIndex = anchor.getRow1();
-                XSSFPictureData picData = pic.getPictureData();
-                rowIndexPDataMap.put(rowIndex, picData);
+    public static void savePictureFromExcel(String filePath, int sheetNum) {
+        try (FileInputStream fis = new FileInputStream(filePath); XSSFWorkbook workbook = (XSSFWorkbook) WorkbookFactory.create(fis)) {
+            XSSFSheet sheet = workbook.getSheetAt(sheetNum);
+            List<XSSFShape> list = sheet.getDrawingPatriarch().getShapes();
+            for (int i = 0; i < sheet.getDrawingPatriarch().getShapes().size(); i++) {
+                XSSFShape shape = list.get(i);
+                XSSFClientAnchor anchor = (XSSFClientAnchor) shape.getAnchor();
+                if (shape instanceof XSSFPicture) {
+                    XSSFPicture pic = (XSSFPicture) shape;
+                    int rowIndex = anchor.getRow1();
+                    XSSFPictureData picData = pic.getPictureData();
+                    rowIndexPDataMap.put(rowIndex, picData);
+                }
             }
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
+
     }
 
     public static void saveImg(int rowIndex, String id) {
