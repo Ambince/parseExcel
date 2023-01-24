@@ -100,7 +100,7 @@ public class Parse {
                     }
 
 
-                    if (!Objects.equals(colValue, "") && (Objects.equals(filed, "index") || Objects.equals(filed, "id"))) {
+                    if (!Objects.equals(colValue, "") && (Objects.equals(filed, "index") || Objects.equals(filed, "id") || Objects.equals(filed, "age"))) {
                         colValue = String.valueOf((int) Math.ceil(Double.parseDouble(colValue)));
                     }
 
