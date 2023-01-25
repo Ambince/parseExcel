@@ -16,12 +16,15 @@ public class Parse {
     public static Map<String, Integer> filedIndexMap = new HashMap<>();
     public static Map<String, List<String>> filedDataListMap = new ConcurrentHashMap<>();
 
+    private static final String split = " ";
+    private static final String _split = "-";
+
 
     public static void main(String[] args) throws Exception {
         savePictureFromExcel(FILEPATH, 0);
         readXlsx(FILEPATH);
         List<PFPInfo> pfpInfoList = new ArrayList<>();
-        for (int i = 1; i < rowIndexPDataMap.size() + 1; i++) {
+        for (int i = 0; i < rowIndexPDataMap.size(); i++) {
             Field[] fields = PFPInfo.class.getDeclaredFields();
             PFPInfo pfpInfo = new PFPInfo();
             for (Field field : fields) {
@@ -46,10 +49,42 @@ public class Parse {
             if (!file.exists()) {
                 file.mkdirs();
             }
-            pfpInfo.setImage_preview_url("https://dagen.io/gens/" + pfpInfo.getId() + "+/image.png");
+            convertName(pfpInfo);
+            pfpInfo.setImage_preview_url("https://dagen.io/pfp/" + pfpInfo.getId() + "/image.png");
             saveFile(pfpInfo);
             saveImg(i + 1, pfpInfo.getId());
         }
+
+    }
+
+    private static void convertName(PFPInfo pfpInfo) {
+        StringBuilder sb = new StringBuilder();
+        if (!pfpInfo.getTitle().equals("")) {
+            sb.append(pfpInfo.getTitle()).append(split);
+        }
+
+        if (!pfpInfo.getName().equals("")) {
+            sb.append(pfpInfo.getName());
+        }
+
+        if (!pfpInfo.getAppellation().equals("")) {
+            sb.append(split).append(pfpInfo.getAppellation());
+        }
+
+        if (!pfpInfo.getMoniker().equals("") || !pfpInfo.getMoniker_meaning().equals("")) {
+            sb.append(split).append(_split);
+
+        }
+
+        if (!pfpInfo.getMoniker().equals("")) {
+            sb.append(split).append("'").append(pfpInfo.getMoniker());
+        }
+
+        if (!pfpInfo.getMoniker_meaning().equals("")) {
+            sb.append(split).append("(").append(pfpInfo.getMoniker_meaning()).append(")").append("'");
+        }
+
+        pfpInfo.setName(sb.toString());
 
     }
 

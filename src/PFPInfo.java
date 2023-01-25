@@ -8,6 +8,7 @@ public class PFPInfo {
     private String image_preview_url;
     private String title;
     private String name;
+    private String appellation;
     private String moniker;
     private String moniker_meaning;
     private String faith;
@@ -22,6 +23,15 @@ public class PFPInfo {
     private String age;
     private String tale;
     private String note;
+
+
+    public String getAppellation() {
+        return appellation;
+    }
+
+    public void setAppellation(String appellation) {
+        this.appellation = appellation;
+    }
 
     public String getIndex() {
         return index;
