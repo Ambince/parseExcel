@@ -1,36 +1,53 @@
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.util.List;
+
 public class PFPInfo {
 
     @JSONField(serialize = false)
     private String index;
     private String id;
-    private String image_preview_url;
+    private String image;
+    @JSONField(serialize = false)
     private String title;
+
     private String name;
-    private String appellation;
-    private String moniker;
-    private String moniker_meaning;
-    private String faith;
-    private String hierarchy;
-    private String race;
-    private String force;
-    private String realm;
-    private String type;
+    @JSONField(serialize = false)
     private String job;
-    private String size;
-    private String gender;
-    private String age;
-    private String tale;
-    private String note;
+    private String description;
+    @JSONField(serialize = false)
+    private String appellation;
+    @JSONField(serialize = false)
+    private String moniker;
+    @JSONField(serialize = false)
+    private String moniker_meaning;
 
+    private String hero_image;
 
-    public String getAppellation() {
-        return appellation;
+    public String getHero_image() {
+        return hero_image;
     }
 
-    public void setAppellation(String appellation) {
-        this.appellation = appellation;
+    public void setHero_image(String hero_image) {
+        this.hero_image = hero_image;
+    }
+
+    private List<AttributeInfo> attributes;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getIndex() {
@@ -49,12 +66,12 @@ public class PFPInfo {
         this.id = id;
     }
 
-    public String getImage_preview_url() {
-        return image_preview_url;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage_preview_url(String image_preview_url) {
-        this.image_preview_url = image_preview_url;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getTitle() {
@@ -73,6 +90,14 @@ public class PFPInfo {
         this.name = name;
     }
 
+    public String getAppellation() {
+        return appellation;
+    }
+
+    public void setAppellation(String appellation) {
+        this.appellation = appellation;
+    }
+
     public String getMoniker() {
         return moniker;
     }
@@ -89,99 +114,11 @@ public class PFPInfo {
         this.moniker_meaning = moniker_meaning;
     }
 
-    public String getFaith() {
-        return faith;
+    public List<AttributeInfo> getAttributes() {
+        return attributes;
     }
 
-    public void setFaith(String faith) {
-        this.faith = faith;
-    }
-
-    public String getHierarchy() {
-        return hierarchy;
-    }
-
-    public void setHierarchy(String hierarchy) {
-        this.hierarchy = hierarchy;
-    }
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public String getForce() {
-        return force;
-    }
-
-    public void setForce(String force) {
-        this.force = force;
-    }
-
-    public String getRealm() {
-        return realm;
-    }
-
-    public void setRealm(String realm) {
-        this.realm = realm;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getTale() {
-        return tale;
-    }
-
-    public void setTale(String tale) {
-        this.tale = tale;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setAttributes(List<AttributeInfo> attributes) {
+        this.attributes = attributes;
     }
 }

@@ -7,6 +7,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 
 public class Parse {
@@ -19,6 +20,12 @@ public class Parse {
     private static final String split = " ";
     private static final String _split = "-";
 
+    private static final String[] deleteFields = {"description", "note", "tale_cn", "tale_文言_这一列并不会有 XD"};
+
+    private static final String DESCRIPTION_TEMPLATE = "Nagas are creatures that is half snake and half human, with green scales covering their skin. They are tall in stature, but surprisingly agile in movement. Nagas primarily reside in Wetland Kolamuniya ('The Lake of Illusion') and have established a vast kingdom called Pelawarata ('the Realm of Swamps') there.";
+
+
+    private static List<String> skipNftId = List.of("5000");
 
     public static void main(String[] args) throws Exception {
         savePictureFromExcel(FILEPATH, 0);
@@ -27,6 +34,7 @@ public class Parse {
         for (int i = 0; i < rowIndexPDataMap.size(); i++) {
             Field[] fields = PFPInfo.class.getDeclaredFields();
             PFPInfo pfpInfo = new PFPInfo();
+            List<AttributeInfo> attributes = new ArrayList<>();
             for (Field field : fields) {
                 Class<? extends PFPInfo> c = pfpInfo.getClass();
                 Field f = c.getDeclaredField(field.getName());
@@ -37,23 +45,76 @@ public class Parse {
                 f.setAccessible(true);
                 f.set(pfpInfo, filedDataListMap.get(field.getName()).get(i));
             }
-            pfpInfoList.add(pfpInfo);
 
+            List<String> collect = Arrays.stream(fields).map(Field::getName).collect(Collectors.toList());
+            collect.remove("job");
+
+            for (String filedName : filedDataListMap.keySet()) {
+                if (collect.contains(filedName)) continue;
+                List<String> strings = filedDataListMap.get(filedName);
+                if (strings == null || strings.size() == 0) {
+                    continue;
+                }
+                String value = filedDataListMap.get(filedName).get(i);
+
+                if (value.equals("")) {
+                    continue;
+                }
+                AttributeInfo attributeInfo = new AttributeInfo();
+                attributeInfo.setTrait_type(filedName);
+                attributeInfo.setValue(value);
+                attributes.add(attributeInfo);
+            }
+            pfpInfo.setAttributes(attributes);
+            pfpInfoList.add(pfpInfo);
         }
 
 
         for (int i = 0; i < pfpInfoList.size(); i++) {
             PFPInfo pfpInfo = pfpInfoList.get(i);
+            if (skipNftId.contains(pfpInfo.getId())) {
+                continue;
+            }
+
             String dirPath = TARGET_PATH + pfpInfo.getId();
             File file = new File(dirPath);
             if (!file.exists()) {
                 file.mkdirs();
             }
+            convertDesc(pfpInfo);
             convertName(pfpInfo);
-            pfpInfo.setImage_preview_url("https://dagen.io/pfp/" + pfpInfo.getId() + "/image.png");
+            pfpInfo.setImage("https://dagen.io/pfp/" + pfpInfo.getId() + "/image.png");
             saveFile(pfpInfo);
             saveImg(i + 1, pfpInfo.getId());
         }
+
+    }
+
+    private static void convertDesc(PFPInfo pfpInfo) {
+        StringBuilder sb = new StringBuilder();
+        if (!pfpInfo.getTitle().equals("")) {
+            sb.append(pfpInfo.getTitle());
+        }
+
+        if (!pfpInfo.getName().equals("")) {
+            sb.append(split).append(pfpInfo.getName());
+        }
+
+        if (!pfpInfo.getAppellation().equals("")) {
+            sb.append(split).append(pfpInfo.getAppellation());
+        }
+
+        sb.append(split).append("is a Naga");
+
+        if (!pfpInfo.getJob().equals("")) {
+            sb.append(split).append(pfpInfo.getJob());
+        }
+
+
+        sb.append(split).append(DESCRIPTION_TEMPLATE);
+
+
+        pfpInfo.setDescription(sb.toString().trim());
 
     }
 
@@ -108,6 +169,8 @@ public class Parse {
                 XSSFCell cell = (XSSFCell) iterator.next();
                 int columnIndex = cell.getColumnIndex();
                 String filed = cell.getStringCellValue();
+                int index = Arrays.binarySearch(deleteFields, filed);
+                if (index > -1) continue;
                 filedIndexMap.put(filed, columnIndex);
             }
 
@@ -120,9 +183,10 @@ public class Parse {
                     int columnIndex = filedIndexMap.get(filed);
                     Cell cell = row.getCell(columnIndex);
                     String colValue = "";
-
                     if (cell != null) {
+                        CellType cellType = cell.getCellType();
                         if (cell.getCellType() == CellType.STRING) {
+                            String string = cell.getRichStringCellValue().getString();
                             colValue = cell.getStringCellValue();
                         } else if (cell.getCellType() == CellType.NUMERIC) {
                             colValue = cell.getNumericCellValue() + "";
@@ -135,7 +199,7 @@ public class Parse {
                     }
 
 
-                    if (!Objects.equals(colValue, "") && (Objects.equals(filed, "index") || Objects.equals(filed, "id") || Objects.equals(filed, "age"))) {
+                    if (!Objects.equals(colValue, "") && (Objects.equals(filed, "index") || Objects.equals(filed, "id") || Objects.equals(filed, "age") || Objects.equals(filed, "age_human"))) {
                         colValue = String.valueOf((int) Math.ceil(Double.parseDouble(colValue)));
                     }
 
